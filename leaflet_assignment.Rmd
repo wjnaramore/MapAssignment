@@ -1,0 +1,24 @@
+---
+title: "LeafletMap"
+author: "Jason Naramore"
+date: "1/26/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r leaflet}
+library(leaflet)
+df<- data.frame(lat = runif(500,min = 38, max = 39),
+                lng = runif(500,min = -80, max = -79))
+df %>%
+  leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers()
+  #addMarkers(clusterOptions = markerClusterOptions())
+
+```
+
