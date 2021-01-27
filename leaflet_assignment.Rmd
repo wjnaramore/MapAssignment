@@ -1,5 +1,5 @@
 ---
-title: "LeafletMap"
+title: "ACC Schools"
 author: "Jason Naramore"
 date: "1/26/2021"
 output: html_document
@@ -9,16 +9,15 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
+This map shows universities in the Atlantic Coast Conference, where the circle size shows the relative enrollment (data from https://en.wikipedia.org/wiki/Atlantic_Coast_Conference)
 ```{r leaflet}
 library(leaflet)
-df<- data.frame(lat = runif(500,min = 38, max = 39),
-                lng = runif(500,min = -80, max = -79))
+acc_data<- read.csv("ACCSchools.csv")
+df<- data.frame(lat = acc_data$lat,
+                lng = acc_data$lng)
 df %>%
   leaflet() %>%
   addTiles() %>%
-  addCircleMarkers()
-  #addMarkers(clusterOptions = markerClusterOptions())
-
+  addCircleMarkers(popup = acc_data$Name, radius = sqrt(acc_data$enrollment)/5, weight = 1)
 ```
 
